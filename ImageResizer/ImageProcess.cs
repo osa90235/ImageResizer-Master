@@ -33,39 +33,36 @@ namespace ImageResizer
 
         //Crippled Version
         //
-        public Task AsyncResizeImages_V2(string sourcePath, string destPath, double scale)
-        {
-            var allFiles = FindImages(sourcePath);
+        //public Task AsyncResizeImages_V2(string sourcePath, string destPath, double scale)
+        //{
+        //    var allFiles = FindImages(sourcePath);
 
-            List<Task> TastList = new List<Task>() { };
-            foreach (var filePath in allFiles)
-            {
-                var T = Task.Run(() => {
-                    Image imgPhoto = Image.FromFile(filePath);
+        //    List<Task> TastList = new List<Task>() { };
+        //    foreach (var filePath in allFiles)
+        //    {
+        //        var T = Task.Run(() => {
+        //            Image imgPhoto = Image.FromFile(filePath);
 
-                    string imgName = Path.GetFileNameWithoutExtension(filePath);
+        //            string imgName = Path.GetFileNameWithoutExtension(filePath);
 
-                    int sourceWidth = imgPhoto.Width;
-                    int sourceHeight = imgPhoto.Height;
+        //            int sourceWidth = imgPhoto.Width;
+        //            int sourceHeight = imgPhoto.Height;
 
-                    int destionatonWidth = (int)(sourceWidth * scale);
-                    int destionatonHeight = (int)(sourceHeight * scale);
+        //            int destionatonWidth = (int)(sourceWidth * scale);
+        //            int destionatonHeight = (int)(sourceHeight * scale);
 
-                    Bitmap processedImage = processBitmap((Bitmap)imgPhoto,
-                                                           sourceWidth,
-                                                           sourceHeight,
-                                                           destionatonWidth,
-                                                           destionatonHeight);
 
-                    string destFile = Path.Combine(destPath, imgName + ".jpg");
-                    processedImage.Save(destFile, ImageFormat.Jpeg);
 
-                    imgPhoto.Dispose();
-                });
-                TastList.Add(T);
-            }
-            return Task.WhenAll(TastList.ToArray());
-        }
+
+        //            string destFile = Path.Combine(destPath, imgName + ".jpg");
+        //            processedImage.Save(destFile, ImageFormat.Jpeg);
+
+        //            imgPhoto.Dispose();
+        //        });
+        //        TastList.Add(T);
+        //    }
+        //    return Task.WhenAll(TastList.ToArray());
+        //}
 
         public Task AsyncResizeImages(string sourcePath, string destPath, double scale)
         {
